@@ -221,4 +221,33 @@ variable "Jump_starting_ip_offset" {
   default     = 30
 }
 
+# =================== DNS =======================================
+variable "existing_dns_zone" {
+  description = "true to use an existing IBM DNS zone, false to create a new one"
+  type        = bool
+  default     = true
+}
+
+variable "dns_instance_id" {
+  description = "GUID of the IBM Cloud DNS Services instance"
+  type        = string
+}
+
+variable "dns_zone_name" {
+  description = "DNS zone name (e.g. gridaas.internal)"
+  type        = string
+}
+
+variable "dns_zone_id" {
+  description = "ID of an existing DNS zone (used when existing_dns_zone = true and zone cannot be found by name)"
+  type        = string
+  default     = ""
+}
+
+variable "dns_ttl" {
+  description = "TTL in seconds for all DNS A and PTR records"
+  type        = number
+  default     = 300
+}
+
 

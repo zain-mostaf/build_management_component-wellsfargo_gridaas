@@ -45,4 +45,39 @@ output "Jump_windows_vsi_ip_addresses" {
   value = module.windows_instances_Jump.windows_vsi_ip_addresses
 }
 
+# ---- DNS outputs -----------------------------------------------
+output "dns_zone_id" {
+  description = "The ID of the DNS zone used for all records"
+  value       = module.dns_linux_jump_server.dns_zone_id
+}
+
+output "dns_linux_jump_server_a_records" {
+  description = "A record IDs for Linux jump server instances"
+  value       = module.dns_linux_jump_server.a_record_ids
+}
+
+output "dns_linux_jump_server_ptr_records" {
+  description = "PTR record IDs for Linux jump server instances"
+  value       = module.dns_linux_jump_server.ptr_record_ids
+}
+
+output "dns_windows_AD_a_records" {
+  description = "A record IDs for Windows AD instances"
+  value       = module.dns_windows_AD.a_record_ids
+}
+
+output "dns_windows_AD_ptr_records" {
+  description = "PTR record IDs for Windows AD instances"
+  value       = module.dns_windows_AD.ptr_record_ids
+}
+
+output "dns_windows_Jump_a_records" {
+  description = "A record IDs for Windows Jump instances"
+  value       = module.dns_windows_Jump.a_record_ids
+}
+
+output "dns_windows_Jump_ptr_records" {
+  description = "PTR record IDs for Windows Jump instances"
+  value       = module.dns_windows_Jump.ptr_record_ids
+}
 

@@ -103,6 +103,41 @@ module "windows_instances_Jump" {
   subnet                          = var.subnets[1].cidr
 }
 
+module "dns_linux_jump_server" {
+  source              = "./module/ibm_dns_record_module"
+  existing_dns_zone   = var.existing_dns_zone
+  dns_instance_id     = var.dns_instance_id
+  dns_zone_name       = var.dns_zone_name
+  dns_zone_id         = var.dns_zone_id
+  ttl                 = var.dns_ttl
+  resource_group_id   = module.resource_group.resource_group_id
+  ip_addresses        = module.linux_instances_jump_server.reserved_ip_addresses
+  hostnames           = [for i in range(var.linux-jump-server_instance_count) : format("%s-jump-host-%1d", var.prefix_name, i + 1)]
+  depends_on          = [module.linux_instances_jump_server]
+}
 
+module "dns_windows_AD" {
+  source              = "./module/ibm_dns_record_module"
+  existing_dns_zone   = var.existing_dns_zone
+  dns_instance_id     = var.dns_instance_id
+  dns_zone_name       = var.dns_zone_name
+  dns_zone_id         = var.dns_zone_id
+  ttl                 = var.dns_ttl
+  resource_group_id   = module.resource_group.resource_group_id
+  ip_addresses        = module.windows_instances_AD.windows_vsi_ip_addresses
+  hostnames           = [for i in range(var.AD_windows_instance_count) : format("%s-ad-%1d", var.prefix_name, i + 1)]
+  depends_on          = [module.windows_instances_AD]
+}
 
-
+module "dns_windows_Jump" {
+  source              = "./module/ibm_dns_record_module"
+  existing_dns_zone   = var.existing_dns_zone
+  dns_instance_id     = var.dns_instance_id
+  dns_zone_name       = var.dns_zone_name
+  dns_zone_id         = var.dns_zone_id
+  ttl                 = var.dns_ttl
+  resource_group_id   = module.resource_group.resource_group_id
+  ip_addresses        = module.windows_instances_Jump.windows_vsi_ip_addresses
+  hostnames           = [for i in range(var.Jump_windows_instance_count) : format("%s-win-jh-%1d", var.prefix_name, i + 1)]
+  depends_on          = [module.windows_instances_Jump]
+}
