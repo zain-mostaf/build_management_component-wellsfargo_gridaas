@@ -35,7 +35,7 @@ module "subnet" {
 module "security_group" {
   source                           = "./module/ibm_security_group_module"
   create_new_security_groups       = var.security_groups_exists
-    existing_security_group_names  = distinct(concat(var.linux_instances_rhel_repo_sg, var.linux_instances_jump_server_sg, var.windows_instances_AD_sg, var.windows_instances_Jump_sg, var.windows_instances_KMS_sg, var.windows_instances_WSUS_sg))
+    existing_security_group_names  = distinct(concat(var.linux_instances_jump_server_sg, var.windows_instances_AD_sg))
   vpc_id                           = module.VPC.vpc_id
   resource_group_id                = module.resource_group.resource_group_id
   security_group_rules             = var.security_group_rules

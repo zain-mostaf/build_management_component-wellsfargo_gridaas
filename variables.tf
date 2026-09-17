@@ -137,11 +137,7 @@ variable "linux_profile" {
   default     = "cx2-4x8"
 }
 
-variable "linux_instances_rhel_repo_sg" {
-  description = "List of security groups for Linux RHEL repo server"
-  type        = list(string)
-  default     = []
-}
+
 
 ################### Jump Server #######################
 variable "linux_instances_jump_server_sg" {
@@ -200,17 +196,8 @@ variable "windows_instances_AD_sg" {
   type        = list(string)
 }
 
-variable "windows_instances_KMS_sg" {
-  description = "List of security groups for Windows KMS server"
-  type        = list(string)
-  default     = []
-}
 
-variable "windows_instances_WSUS_sg" {
-  description = "List of security groups for Windows WSUS server"
-  type        = list(string)
-  default     = []
-}
+
 
 # ################ Windows Jump ####################
 variable "Jump_windows_instance_count" {
