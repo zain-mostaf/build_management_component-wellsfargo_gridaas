@@ -119,6 +119,30 @@ variable "public_key" {
 
 
 
+# =================== Naming prefix =======================
+variable "prefix_name" {
+  description = "Prefix used to name all provisioned resources"
+  type        = string
+}
+
+# =================== Linux VSI =======================
+variable "linux_image_id" {
+  description = "Image ID for Linux instances"
+  type        = string
+}
+
+variable "linux_profile" {
+  description = "Profile for Linux instances"
+  type        = string
+  default     = "cx2-4x8"
+}
+
+variable "linux_instances_rhel_repo_sg" {
+  description = "List of security groups for Linux RHEL repo server"
+  type        = list(string)
+  default     = []
+}
+
 ################### Jump Server #######################
 variable "linux_instances_jump_server_sg" {
   description = "List of security groups for Jump server"
@@ -176,6 +200,17 @@ variable "windows_instances_AD_sg" {
   type        = list(string)
 }
 
+variable "windows_instances_KMS_sg" {
+  description = "List of security groups for Windows KMS server"
+  type        = list(string)
+  default     = []
+}
+
+variable "windows_instances_WSUS_sg" {
+  description = "List of security groups for Windows WSUS server"
+  type        = list(string)
+  default     = []
+}
 
 # ################ Windows Jump ####################
 variable "Jump_windows_instance_count" {
