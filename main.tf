@@ -111,8 +111,8 @@ module "dns_linux_jump_server" {
   dns_zone_id         = var.dns_zone_id
   ttl                 = var.dns_ttl
   resource_group_id   = module.resource_group.resource_group_id
-  ip_addresses        = module.linux_instances_jump_server.reserved_ip_addresses
-  hostnames           = [for i in range(var.linux-jump-server_instance_count) : format("%s-jump-host-%1d", var.prefix_name, i + 1)]
+  ip_addresses        = [for v in values(module.linux_instances_jump_server.reserved_ip_addresses) : v.ip_address]
+  hostnames           = [for v in values(module.linux_instances_jump_server.reserved_ip_addresses) : v.name]
   depends_on          = [module.linux_instances_jump_server]
 }
 
@@ -124,8 +124,8 @@ module "dns_windows_AD" {
   dns_zone_id         = var.dns_zone_id
   ttl                 = var.dns_ttl
   resource_group_id   = module.resource_group.resource_group_id
-  ip_addresses        = module.windows_instances_AD.windows_vsi_ip_addresses
-  hostnames           = [for i in range(var.AD_windows_instance_count) : format("%s-ad-%1d", var.prefix_name, i + 1)]
+  ip_addresses        = [for v in values(module.windows_instances_AD.windows_vsi_ip_addresses) : v.ip_address]
+  hostnames           = [for v in values(module.windows_instances_AD.windows_vsi_ip_addresses) : v.name]
   depends_on          = [module.windows_instances_AD]
 }
 
@@ -137,7 +137,7 @@ module "dns_windows_Jump" {
   dns_zone_id         = var.dns_zone_id
   ttl                 = var.dns_ttl
   resource_group_id   = module.resource_group.resource_group_id
-  ip_addresses        = module.windows_instances_Jump.windows_vsi_ip_addresses
-  hostnames           = [for i in range(var.Jump_windows_instance_count) : format("%s-win-jh-%1d", var.prefix_name, i + 1)]
+  ip_addresses        = [for v in values(module.windows_instances_Jump.windows_vsi_ip_addresses) : v.ip_address]
+  hostnames           = [for v in values(module.windows_instances_Jump.windows_vsi_ip_addresses) : v.name]
   depends_on          = [module.windows_instances_Jump]
 }
